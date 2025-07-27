@@ -14,11 +14,7 @@ public class User {
         this.upvoted = new ArrayList<>();
         this.downvoted = new ArrayList<>();
     }
-
-    public String getUsername() {
-        return this.username;
-    }
-
+    
     public int getKarma() {
         return this.karma;
     }
