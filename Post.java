@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 public class Post {
     private String title;
     private String content;
@@ -9,7 +10,6 @@ public class Post {
 
     private static final String ROOT_FMT = "[%d|%d]\t%s%n\t%s";
     private static final String REPLY_FMT = "[%d|%d]\t%s";
-
 
     public Post(String title, String content, User author) {
         this.title = title;
@@ -29,12 +29,12 @@ public class Post {
         this.downvoteCount = 0;
     }
 
-    public String getContent() {
-    return this.content;
-    }
-    
     public String getTitle() {
         return this.title;
+    }
+
+    public String getContent() {
+        return this.content;
     }
 
     public Post getReplyTo() {
@@ -57,11 +57,8 @@ public class Post {
         if (isIncrement) {
             this.upvoteCount++;
         } else {
-            if (this.upvoteCount == 0) {
-                return;
-            } else {
-                this.upvoteCount--;
-            }
+            if (this.upvoteCount == 0) return;
+            this.upvoteCount--;
         }
     }
 
@@ -69,11 +66,8 @@ public class Post {
         if (isIncrement) {
             this.downvoteCount++;
         } else {
-            if (this.downvoteCount == 0) {
-                return;
-            } else {
-                this.downvoteCount--;
-            }
+            if (this.downvoteCount == 0) return;
+            this.downvoteCount--;
         }
     }
 
@@ -89,8 +83,7 @@ public class Post {
             Post tmp = chain.get(i);
             chain.set(i, chain.get(j));
             chain.set(j, tmp);
-            i++;
-            j--;
+            i++; j--;
         }
         return chain;
     }
@@ -105,3 +98,4 @@ public class Post {
         }
     }
 }
+
