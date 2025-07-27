@@ -29,6 +29,10 @@ public class Post {
         this.downvoteCount = 0;
     }
 
+    public String getContent() {
+    return this.content;
+    }
+    
     public String getTitle() {
         return this.title;
     }
