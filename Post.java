@@ -33,10 +33,6 @@ public class Post {
         return this.title;
     }
 
-    public String getContent() {
-        return this.content;
-    }
-
     public Post getReplyTo() {
         return this.replyTo;
     }
