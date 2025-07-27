@@ -38,7 +38,7 @@ public class User {
         updateKarma();
     }
 
-    private void updateKarma() {
+    public void updateKarma() {
         int total = 0;
         for (int i = 0; i < this.posts.size(); i++) {
             Post p = this.posts.get(i);
