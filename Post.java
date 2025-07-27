@@ -8,9 +8,6 @@ public class Post {
     private int upvoteCount;
     private int downvoteCount;
 
-    private static final String ROOT_FMT = "[%d|%d]\t%s%n\t%s";
-    private static final String REPLY_FMT = "[%d|%d]\t%s";
-
     public Post(String title, String content, User author) {
         this.title = title;
         this.content = content;
@@ -33,10 +30,6 @@ public class Post {
         return this.title;
     }
 
-    public String getContent() {
-        return this.content;
-    }
-
     public Post getReplyTo() {
         return this.replyTo;
     }
@@ -55,19 +48,25 @@ public class Post {
 
     public void updateUpvoteCount(boolean isIncrement) {
         if (isIncrement) {
-            this.upvoteCount++;
+            this.upvoteCount = this.upvoteCount + 1;
         } else {
-            if (this.upvoteCount == 0) return;
-            this.upvoteCount--;
+            if (this.upvoteCount == 0) {
+                return;
+            } else {
+                this.upvoteCount = this.upvoteCount - 1;
+            }
         }
     }
 
     public void updateDownvoteCount(boolean isIncrement) {
         if (isIncrement) {
-            this.downvoteCount++;
+            this.downvoteCount = this.downvoteCount + 1;
         } else {
-            if (this.downvoteCount == 0) return;
-            this.downvoteCount--;
+            if (this.downvoteCount == 0) {
+                return;
+            } else {
+                this.downvoteCount = this.downvoteCount - 1;
+            }
         }
     }
 
@@ -78,23 +77,25 @@ public class Post {
             chain.add(cur);
             cur = cur.replyTo;
         }
-        int i = 0, j = chain.size() - 1;
+        int i = 0;
+        int j = chain.size() - 1;
         while (i < j) {
             Post tmp = chain.get(i);
             chain.set(i, chain.get(j));
             chain.set(j, tmp);
-            i++; j--;
+            i = i + 1;
+            j = j - 1;
         }
         return chain;
     }
 
     public String toString() {
         if (this.replyTo == null) {
-            return String.format(ROOT_FMT, this.upvoteCount, this.downvoteCount,
-                                 this.title, this.content);
+            return "[" + this.upvoteCount + "|" + this.downvoteCount + "]\t"
+                 + this.title + "\n\t" + this.content;
         } else {
-            return String.format(REPLY_FMT, this.upvoteCount, this.downvoteCount,
-                                 this.content);
+            return "[" + this.upvoteCount + "|" + this.downvoteCount + "]\t"
+                 + this.content;
         }
     }
 }
